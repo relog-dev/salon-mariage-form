@@ -2,6 +2,8 @@
   "use strict";
 
   const ENDPOINT = "https://api.web3forms.com/submit";
+  const TIMEOUT_MS = 15000; // wedding-fair networks are often saturated
+  const CONTACT_EMAIL = "salonmariagenice@nicolascatovic.fr";
 
   const form = document.getElementById("lvp-form");
   const success = document.getElementById("lvp-success");
@@ -91,6 +93,18 @@
     };
   }
 
+  // Failure message with a clickable fallback address (DOM nodes, no innerHTML)
+  function showSendError() {
+    const link = document.createElement("a");
+    link.href = `mailto:${CONTACT_EMAIL}`;
+    link.textContent = CONTACT_EMAIL;
+    status.replaceChildren(
+      "L'envoi n'a pas abouti. Réessayez dans un instant ou écrivez-nous à ",
+      link,
+      "."
+    );
+  }
+
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     status.textContent = "";
@@ -99,11 +113,15 @@
     submitBtn.disabled = true;
     submitBtn.textContent = "Envoi en cours…";
 
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
+
     try {
       const response = await fetch(ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify(buildPayload()),
+        signal: controller.signal,
       });
       const result = await response.json();
       if (!response.ok || !result.success) throw new Error(result.message || "Submission failed");
@@ -115,9 +133,11 @@
       success.scrollIntoView({ behavior: "smooth", block: "center" });
     } catch (err) {
       console.error(err);
-      status.textContent = "Une erreur est survenue. Réessayez ou contactez-nous directement.";
+      showSendError();
       submitBtn.disabled = false;
       submitBtn.textContent = "Recevoir mon devis";
+    } finally {
+      clearTimeout(timer);
     }
   });
 })();

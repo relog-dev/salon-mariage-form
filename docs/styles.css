@@ -344,6 +344,12 @@
   display: none;
 }
 
+.lvp .lvp-status a {
+  color: inherit;
+  text-decoration: underline;
+  overflow-wrap: anywhere; /* long address on narrow screens */
+}
+
 .lvp .lvp-success {
   padding: 40px 20px;
   border: 1px solid var(--gold);
