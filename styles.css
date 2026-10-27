@@ -1,0 +1,428 @@
+/*
+ * Every selector starts with `.lvp` and every class with `lvp-`, so the form stays
+ * self-contained and can be dropped into another page without style clashes. The reset
+ * block below neutralizes the properties host themes most often set on bare elements.
+ */
+.lvp {
+  --bg: #f7f1e8;
+  --surface: #fffdf9;
+  --ink: #2b2420;
+  --muted: #6f655d;
+  --gold: #b08d57;
+  --gold-dark: #8a6b3d;
+  --line: #e6dccd;
+  --error: #b3261e;
+  --radius: 14px;
+  --serif: "Cormorant Garamond", Georgia, serif;
+  --sans: "Inter", system-ui, -apple-system, sans-serif;
+
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 16px/1.55 var(--sans);
+  text-align: left;
+  letter-spacing: normal;
+  text-transform: none;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Host-theme reset */
+.lvp *,
+.lvp *::before,
+.lvp *::after {
+  box-sizing: border-box;
+}
+
+.lvp h1,
+.lvp h2,
+.lvp p,
+.lvp fieldset,
+.lvp legend,
+.lvp label,
+.lvp span {
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.lvp fieldset {
+  min-width: 0;
+  border: 0;
+}
+
+.lvp a,
+.lvp button {
+  letter-spacing: normal;
+  text-transform: none;
+  text-decoration: none;
+  box-shadow: none;
+}
+
+.lvp input,
+.lvp textarea {
+  margin: 0;
+  max-width: none;
+  box-shadow: none;
+  letter-spacing: normal;
+}
+
+.lvp [hidden] {
+  display: none !important;
+}
+
+/* Hero */
+.lvp .lvp-hero {
+  padding: 48px 20px 40px;
+  text-align: center;
+  background: linear-gradient(180deg, #efe4d3 0%, var(--bg) 100%);
+}
+
+.lvp .lvp-brand {
+  margin: 0 0 28px;
+  font: 600 0.8rem/1 var(--sans);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+.lvp .lvp-eyebrow {
+  display: inline-block;
+  margin: 0 0 12px;
+  padding: 6px 14px;
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  color: var(--gold-dark);
+  font: 500 0.8rem/1.4 var(--sans);
+}
+
+.lvp .lvp-title {
+  margin: 0;
+  color: var(--ink);
+  font: 600 3.4rem/1 var(--serif);
+}
+
+.lvp .lvp-title-lead {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.55em;
+  font-weight: 500;
+}
+
+.lvp .lvp-hero-sub {
+  margin: 8px 0 16px;
+  color: var(--gold-dark);
+  font: 500 1.35rem/1.3 var(--serif);
+}
+
+.lvp .lvp-hero-text {
+  max-width: 34em;
+  margin: 0 auto 24px;
+  color: var(--muted);
+}
+
+/* Buttons */
+.lvp .lvp-btn {
+  display: inline-block;
+  min-height: 52px;
+  padding: 14px 28px;
+  border-radius: 999px;
+  font: 600 1rem/1.4 var(--sans);
+  cursor: pointer;
+}
+
+.lvp .lvp-btn-ghost {
+  border: 1px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+}
+
+.lvp .lvp-btn-primary {
+  width: 100%;
+  border: 0;
+  background: var(--ink);
+  color: #fff;
+}
+
+.lvp .lvp-btn-primary:hover {
+  background: #000;
+}
+
+.lvp .lvp-btn-primary:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+/* Form layout */
+.lvp .lvp-main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 8px 16px 40px;
+}
+
+.lvp .lvp-form {
+  display: grid;
+  gap: 20px;
+}
+
+.lvp .lvp-block {
+  margin: 0;
+  padding: 20px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.lvp .lvp-block-title {
+  padding: 0;
+  font: 600 1.5rem/1.2 var(--serif);
+}
+
+.lvp .lvp-block-hint {
+  margin: 6px 0 16px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.lvp .lvp-grid {
+  display: grid;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.lvp .lvp-field label {
+  display: block;
+  margin-bottom: 6px;
+  font: 500 0.9rem/1.4 var(--sans);
+}
+
+.lvp .lvp-optional {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.lvp input[type="text"],
+.lvp input[type="email"],
+.lvp input[type="tel"],
+.lvp input[type="date"],
+.lvp textarea {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 50px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink);
+  font: 16px/1.4 var(--sans); /* 16px prevents iOS zoom on focus */
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.lvp textarea {
+  resize: vertical;
+}
+
+.lvp input:focus-visible,
+.lvp textarea:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 1px;
+  border-color: var(--gold);
+}
+
+.lvp [aria-invalid="true"] {
+  border-color: var(--error) !important;
+}
+
+.lvp .lvp-error {
+  margin: 6px 0 0;
+  color: var(--error);
+  font-size: 0.85rem;
+}
+
+/* Plan cards */
+.lvp .lvp-plans {
+  display: grid;
+  gap: 12px;
+}
+
+.lvp .lvp-plan {
+  position: relative;
+  display: block;
+  cursor: pointer;
+}
+
+.lvp .lvp-plan input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.lvp .lvp-plan-body {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 2px 12px;
+  padding: 16px 18px;
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.lvp .lvp-plan-name {
+  font: 600 1.3rem/1.2 var(--serif);
+}
+
+.lvp .lvp-plan-price {
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-align: right;
+}
+
+.lvp .lvp-plan-detail {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.lvp .lvp-plan-badge {
+  grid-column: 1 / -1;
+  justify-self: start;
+  margin-bottom: 4px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--gold);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.lvp .lvp-plan-undecided .lvp-plan-body {
+  border-style: dashed;
+}
+
+.lvp .lvp-plan input:checked + .lvp-plan-body {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(176, 141, 87, 0.2);
+  background: #fffaf2;
+}
+
+.lvp .lvp-plan input:focus-visible + .lvp-plan-body {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* Consent */
+.lvp .lvp-check {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  color: var(--muted);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.lvp .lvp-check input {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  accent-color: var(--gold-dark);
+}
+
+/* Status / success */
+.lvp .lvp-status {
+  margin: 0;
+  color: var(--error);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.lvp .lvp-status:empty {
+  display: none;
+}
+
+.lvp .lvp-success {
+  padding: 40px 20px;
+  border: 1px solid var(--gold);
+  border-radius: var(--radius);
+  background: var(--surface);
+  text-align: center;
+}
+
+.lvp .lvp-success-title {
+  margin: 0 0 8px;
+  font: 600 2.2rem/1.1 var(--serif);
+}
+
+.lvp .lvp-success:focus {
+  outline: none;
+}
+
+/* Honeypot */
+.lvp .lvp-hp {
+  position: absolute;
+  left: -9999px;
+}
+
+.lvp .lvp-footer {
+  padding: 24px 16px 40px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+/* Larger screens */
+@media (min-width: 640px) {
+  .lvp .lvp-hero {
+    padding: 72px 24px 56px;
+  }
+
+  .lvp .lvp-title {
+    font-size: 4.5rem;
+  }
+
+  .lvp .lvp-block {
+    padding: 28px;
+  }
+
+  .lvp .lvp-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .lvp .lvp-field-full {
+    grid-column: 1 / -1;
+  }
+
+  .lvp .lvp-plans {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .lvp .lvp-plan-body {
+    height: 100%;
+    grid-template-columns: 1fr;
+    align-content: start;
+    text-align: center;
+  }
+
+  .lvp .lvp-plan-price {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+  .lvp .lvp-plan-badge {
+    justify-self: center;
+  }
+
+  .lvp .lvp-plan-undecided {
+    grid-column: 1 / -1;
+  }
+
+  .lvp .lvp-btn-primary {
+    width: auto;
+    justify-self: center;
+    padding-inline: 48px;
+  }
+}

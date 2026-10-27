@@ -1,0 +1,82 @@
+(function () {
+  "use strict";
+
+  const ENDPOINT = "https://api.web3forms.com/submit";
+
+  const form = document.getElementById("lvp-form");
+  const success = document.getElementById("lvp-success");
+  const status = form.querySelector(".lvp-status");
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const dateInput = form.querySelector("#lvp-date");
+
+  // Event date cannot be in the past
+  const today = new Date();
+  today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
+  dateInput.min = today.toISOString().slice(0, 10);
+
+  function setError(name, hasError) {
+    const message = form.querySelector(`[data-error-for="${name}"]`);
+    if (message) message.hidden = !hasError;
+    form.querySelectorAll(`[name="${name}"]`).forEach((el) => {
+      if (el.type !== "radio") el.setAttribute("aria-invalid", String(hasError));
+    });
+  }
+
+  function validate() {
+    const required = Array.from(form.querySelectorAll("[required]"));
+    const names = [...new Set(required.map((el) => el.name))];
+    let firstInvalid = null;
+
+    names.forEach((name) => {
+      const fields = Array.from(form.querySelectorAll(`[name="${name}"]`));
+      const valid = fields.some((el) => el.checkValidity() && (el.type !== "radio" || el.checked)) &&
+        fields.every((el) => el.type === "radio" || el.checkValidity());
+      setError(name, !valid);
+      if (!valid && !firstInvalid) firstInvalid = fields[0];
+    });
+
+    if (firstInvalid) {
+      firstInvalid.closest(".lvp-block, .lvp-consent, .lvp-field")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      firstInvalid.focus({ preventScroll: true });
+    }
+    return !firstInvalid;
+  }
+
+  // Clear a field's error as soon as the user fixes it
+  form.addEventListener("input", (e) => {
+    if (e.target.name && e.target.checkValidity()) setError(e.target.name, false);
+  });
+  form.addEventListener("change", (e) => {
+    if (e.target.type === "radio" || e.target.type === "checkbox") setError(e.target.name, false);
+  });
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    status.textContent = "";
+    if (!validate()) return;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Envoi en cours…";
+
+    try {
+      const data = Object.fromEntries(new FormData(form));
+      const response = await fetch(ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(data),
+      });
+      const result = await response.json();
+      if (!response.ok || !result.success) throw new Error(result.message || "Submission failed");
+
+      form.hidden = true;
+      success.hidden = false;
+      success.focus();
+      success.scrollIntoView({ behavior: "smooth", block: "center" });
+    } catch (err) {
+      console.error(err);
+      status.textContent = "Une erreur est survenue. Réessayez ou contactez-nous directement.";
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Recevoir mon devis";
+    }
+  });
+})();

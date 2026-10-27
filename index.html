@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Offre Salon du Mariage — Formule complète DUO | Nicolas Catovic / LV Production</title>
+  <meta name="description" content="Offre spéciale Salon du Mariage : photographe, vidéaste et photobooth pour votre mariage. Demandez votre devis.">
+  <meta name="theme-color" content="#f7f1e8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>body { margin: 0; background: #f7f1e8; }</style>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="lvp">
+  <div class="lvp-hero">
+    <p class="lvp-brand">Nicolas Catovic / LV Production</p>
+    <p class="lvp-eyebrow">Offre spéciale Salon du Mariage</p>
+    <h1 class="lvp-title"><span class="lvp-title-lead">Formule complète</span> DUO</h1>
+    <p class="lvp-hero-sub">Photographe&nbsp;/ Vidéaste&nbsp;/ Photobooth</p>
+    <p class="lvp-hero-text">Un seul interlocuteur pour immortaliser chaque instant de votre journée. Laissez-nous vos coordonnées, nous vous envoyons un devis personnalisé.</p>
+    <a class="lvp-btn lvp-btn-ghost" href="#lvp-demande">Demander mon devis</a>
+  </div>
+
+  <div class="lvp-main" id="lvp-demande">
+    <form id="lvp-form" class="lvp-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
+      <!-- Web3Forms config: replace the access key with the one received by email -->
+      <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+      <input type="hidden" name="subject" value="Nouvelle demande — Offre Salon du Mariage">
+      <input type="hidden" name="from_name" value="Formulaire Salon du Mariage">
+      <!-- Honeypot: hidden from humans, bots tick it -->
+      <input type="checkbox" name="botcheck" class="lvp-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <fieldset class="lvp-block">
+        <legend class="lvp-block-title">Choisissez votre formule</legend>
+        <p class="lvp-block-hint">Photographe + vidéaste + photobooth inclus dans chaque formule. Seule la durée du film change.</p>
+
+        <div class="lvp-plans" role="radiogroup">
+          <label class="lvp-plan">
+            <input type="radio" name="formule" value="Formule 1 — 3 800 € — film 5/7 min" required>
+            <span class="lvp-plan-body">
+              <span class="lvp-plan-name">Essentiel</span>
+              <span class="lvp-plan-price">3 800&nbsp;€</span>
+              <span class="lvp-plan-detail">Film de 5 à 7&nbsp;min</span>
+            </span>
+          </label>
+          <label class="lvp-plan">
+            <input type="radio" name="formule" value="Formule 2 — 4 000 € — film 12/15 min">
+            <span class="lvp-plan-body">
+              <span class="lvp-plan-badge">Le plus choisi</span>
+              <span class="lvp-plan-name">Signature</span>
+              <span class="lvp-plan-price">4 000&nbsp;€</span>
+              <span class="lvp-plan-detail">Film de 12 à 15&nbsp;min</span>
+            </span>
+          </label>
+          <label class="lvp-plan">
+            <input type="radio" name="formule" value="Formule 3 — 4 500 € — film 25/30 min">
+            <span class="lvp-plan-body">
+              <span class="lvp-plan-name">Prestige</span>
+              <span class="lvp-plan-price">4 500&nbsp;€</span>
+              <span class="lvp-plan-detail">Film de 25 à 30&nbsp;min</span>
+            </span>
+          </label>
+          <label class="lvp-plan lvp-plan-undecided">
+            <input type="radio" name="formule" value="Pas encore décidé">
+            <span class="lvp-plan-body">
+              <span class="lvp-plan-name">Je ne sais pas encore</span>
+              <span class="lvp-plan-detail">On en discute ensemble</span>
+            </span>
+          </label>
+        </div>
+        <p class="lvp-error" data-error-for="formule" hidden>Choisissez une formule (ou « Je ne sais pas encore »).</p>
+      </fieldset>
+
+      <fieldset class="lvp-block">
+        <legend class="lvp-block-title">Vos coordonnées</legend>
+        <div class="lvp-grid">
+          <div class="lvp-field">
+            <label for="lvp-prenom">Prénom</label>
+            <input id="lvp-prenom" name="prenom" type="text" autocomplete="given-name" required>
+            <p class="lvp-error" data-error-for="prenom" hidden>Indiquez votre prénom.</p>
+          </div>
+          <div class="lvp-field">
+            <label for="lvp-nom">Nom</label>
+            <input id="lvp-nom" name="nom" type="text" autocomplete="family-name" required>
+            <p class="lvp-error" data-error-for="nom" hidden>Indiquez votre nom.</p>
+          </div>
+          <div class="lvp-field">
+            <label for="lvp-email">Email</label>
+            <input id="lvp-email" name="email" type="email" autocomplete="email" inputmode="email" required>
+            <p class="lvp-error" data-error-for="email" hidden>Indiquez un email valide.</p>
+          </div>
+          <div class="lvp-field">
+            <label for="lvp-telephone">Téléphone</label>
+            <input id="lvp-telephone" name="telephone" type="tel" autocomplete="tel" inputmode="tel" pattern="[0-9+ .()\-]{10,}" required>
+            <p class="lvp-error" data-error-for="telephone" hidden>Indiquez un numéro de téléphone valide.</p>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="lvp-block">
+        <legend class="lvp-block-title">Votre événement</legend>
+        <div class="lvp-grid">
+          <div class="lvp-field">
+            <label for="lvp-date">Date de l'événement</label>
+            <input id="lvp-date" name="date_evenement" type="date" required>
+            <p class="lvp-error" data-error-for="date_evenement" hidden>Indiquez une date à venir.</p>
+          </div>
+          <div class="lvp-field">
+            <label for="lvp-lieu">Lieu de l'événement</label>
+            <input id="lvp-lieu" name="lieu_evenement" type="text" placeholder="Ville ou nom du domaine" required>
+            <p class="lvp-error" data-error-for="lieu_evenement" hidden>Indiquez le lieu.</p>
+          </div>
+          <div class="lvp-field lvp-field-full">
+            <label for="lvp-message">Votre projet <span class="lvp-optional">(facultatif)</span></label>
+            <textarea id="lvp-message" name="message" rows="4" placeholder="Nombre d'invités, ambiance, demandes particulières…"></textarea>
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="lvp-consent">
+        <label class="lvp-check">
+          <input type="checkbox" name="consentement" value="oui" required>
+          <span>J'accepte que mes informations soient utilisées pour être recontacté(e) au sujet de ma demande de devis.</span>
+        </label>
+        <p class="lvp-error" data-error-for="consentement" hidden>Votre accord est nécessaire pour envoyer la demande.</p>
+      </div>
+
+      <button type="submit" class="lvp-btn lvp-btn-primary">Recevoir mon devis</button>
+      <p class="lvp-status" role="status" aria-live="polite"></p>
+    </form>
+
+    <div id="lvp-success" class="lvp-success" hidden tabindex="-1">
+      <h2 class="lvp-success-title">Merci&nbsp;!</h2>
+      <p>Votre demande est bien envoyée. Nous revenons vers vous sous 48&nbsp;h avec un devis personnalisé.</p>
+    </div>
+  </div>
+
+  <p class="lvp-footer">Offre valable pour toute demande effectuée suite au Salon du Mariage.</p>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
