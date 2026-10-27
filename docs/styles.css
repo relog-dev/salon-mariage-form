@@ -9,7 +9,7 @@
   --ink: #2b2420;
   --muted: #6f655d;
   --gold: #b08d57;
-  --gold-dark: #8a6b3d;
+  --gold-dark: #7a5c30;
   --line: #e6dccd;
   --error: #b3261e;
   --radius: 14px;
@@ -223,6 +223,11 @@
   resize: vertical;
 }
 
+/* iOS Safari centers the value of a restyled date input */
+.lvp input[type="date"]::-webkit-date-and-time-value {
+  text-align: left;
+}
+
 .lvp input:focus-visible,
 .lvp textarea:focus-visible {
   outline: 2px solid var(--gold);
@@ -292,7 +297,7 @@
   margin-bottom: 4px;
   padding: 2px 10px;
   border-radius: 999px;
-  background: var(--gold);
+  background: var(--gold-dark);
   color: #fff;
   font-size: 0.72rem;
   font-weight: 600;

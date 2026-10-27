@@ -17,11 +17,23 @@
   today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
   dateInput.min = today.toISOString().slice(0, 10);
 
+  // Link the field to its message only while the error is shown: screen readers also
+  // read hidden elements referenced by aria-describedby.
+  function describe(el, messageId, hasError) {
+    if (hasError) el.setAttribute("aria-describedby", messageId);
+    else el.removeAttribute("aria-describedby");
+  }
+
   function setError(name, hasError) {
     const message = form.querySelector(`[data-error-for="${name}"]`);
     if (message) message.hidden = !hasError;
     form.querySelectorAll(`[name="${name}"]`).forEach((el) => {
-      if (el.type !== "radio") el.setAttribute("aria-invalid", String(hasError));
+      if (el.type === "radio") {
+        if (message) describe(el.closest("fieldset"), message.id, hasError);
+        return;
+      }
+      el.setAttribute("aria-invalid", String(hasError));
+      if (message) describe(el, message.id, hasError);
     });
   }
 

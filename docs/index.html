@@ -9,7 +9,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <style>body { margin: 0; background: #f7f1e8; }</style>
+  <style>
+    body { margin: 0; background: #f7f1e8; }
+    @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+  </style>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -36,7 +39,7 @@
         <legend class="lvp-block-title">Choisissez votre formule</legend>
         <p class="lvp-block-hint">Photographe + vidéaste + photobooth inclus dans chaque formule. Seule la durée du film change.</p>
 
-        <div class="lvp-plans" role="radiogroup">
+        <div class="lvp-plans">
           <label class="lvp-plan">
             <input type="radio" name="formule" value="Essentiel — 3 800 € — film de 5 à 7 min" required>
             <span class="lvp-plan-body">
@@ -70,7 +73,7 @@
             </span>
           </label>
         </div>
-        <p class="lvp-error" data-error-for="formule" hidden>Choisissez une formule (ou « Je ne sais pas encore »).</p>
+        <p class="lvp-error" id="lvp-err-formule" data-error-for="formule" hidden>Choisissez une formule (ou « Je ne sais pas encore »).</p>
       </fieldset>
 
       <fieldset class="lvp-block">
@@ -79,22 +82,22 @@
           <div class="lvp-field">
             <label for="lvp-prenom">Prénom</label>
             <input id="lvp-prenom" name="prenom" type="text" autocomplete="given-name" required>
-            <p class="lvp-error" data-error-for="prenom" hidden>Indiquez votre prénom.</p>
+            <p class="lvp-error" id="lvp-err-prenom" data-error-for="prenom" hidden>Indiquez votre prénom.</p>
           </div>
           <div class="lvp-field">
             <label for="lvp-nom">Nom</label>
             <input id="lvp-nom" name="nom" type="text" autocomplete="family-name" required>
-            <p class="lvp-error" data-error-for="nom" hidden>Indiquez votre nom.</p>
+            <p class="lvp-error" id="lvp-err-nom" data-error-for="nom" hidden>Indiquez votre nom.</p>
           </div>
           <div class="lvp-field">
             <label for="lvp-email">Email</label>
             <input id="lvp-email" name="email" type="email" autocomplete="email" inputmode="email" required>
-            <p class="lvp-error" data-error-for="email" hidden>Indiquez un email valide.</p>
+            <p class="lvp-error" id="lvp-err-email" data-error-for="email" hidden>Indiquez un email valide.</p>
           </div>
           <div class="lvp-field">
             <label for="lvp-telephone">Téléphone</label>
             <input id="lvp-telephone" name="telephone" type="tel" autocomplete="tel" inputmode="tel" pattern="[0-9+ .\(\)\-]{10,}" required>
-            <p class="lvp-error" data-error-for="telephone" hidden>Indiquez un numéro de téléphone valide.</p>
+            <p class="lvp-error" id="lvp-err-telephone" data-error-for="telephone" hidden>Indiquez un numéro de téléphone valide.</p>
           </div>
         </div>
       </fieldset>
@@ -105,12 +108,12 @@
           <div class="lvp-field">
             <label for="lvp-date">Date de l'événement</label>
             <input id="lvp-date" name="date_evenement" type="date" required>
-            <p class="lvp-error" data-error-for="date_evenement" hidden>Indiquez une date à venir.</p>
+            <p class="lvp-error" id="lvp-err-date_evenement" data-error-for="date_evenement" hidden>Indiquez une date à venir.</p>
           </div>
           <div class="lvp-field">
             <label for="lvp-lieu">Lieu de l'événement</label>
             <input id="lvp-lieu" name="lieu_evenement" type="text" placeholder="Ville ou nom du domaine" required>
-            <p class="lvp-error" data-error-for="lieu_evenement" hidden>Indiquez le lieu.</p>
+            <p class="lvp-error" id="lvp-err-lieu_evenement" data-error-for="lieu_evenement" hidden>Indiquez le lieu.</p>
           </div>
           <div class="lvp-field lvp-field-full">
             <label for="lvp-message">Votre projet <span class="lvp-optional">(facultatif)</span></label>
@@ -124,7 +127,7 @@
           <input type="checkbox" name="consentement" value="oui" required>
           <span>J'accepte que mes informations soient utilisées pour être recontacté(e) au sujet de ma demande de devis.</span>
         </label>
-        <p class="lvp-error" data-error-for="consentement" hidden>Votre accord est nécessaire pour envoyer la demande.</p>
+        <p class="lvp-error" id="lvp-err-consentement" data-error-for="consentement" hidden>Votre accord est nécessaire pour envoyer la demande.</p>
       </div>
 
       <button type="submit" class="lvp-btn lvp-btn-primary">Recevoir mon devis</button>
