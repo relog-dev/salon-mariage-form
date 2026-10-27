@@ -48,7 +48,7 @@ if ss -tln | grep -q ":$PORT "; then
   exit 1
 fi
 
-python3 -m http.server "$PORT" --bind 127.0.0.1 --directory "$ROOT" >/dev/null 2>&1 &
+python3 -m http.server "$PORT" --bind 127.0.0.1 --directory "$ROOT/docs" >/dev/null 2>&1 &
 SERVER_PID=$!
 "$CLOUDFLARED" tunnel --no-autoupdate --url "http://127.0.0.1:$PORT" >"$LOG" 2>&1 &
 TUNNEL_PID=$!
