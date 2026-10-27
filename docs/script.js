@@ -50,6 +50,46 @@
     if (e.target.type === "radio" || e.target.type === "checkbox") setError(e.target.name, false);
   });
 
+  // "2027-06-12" -> "samedi 12 juin 2027" (parsed as UTC to avoid an off-by-one day)
+  function formatDate(iso) {
+    const date = new Date(`${iso}T00:00:00Z`);
+    if (Number.isNaN(date.getTime())) return iso;
+    return new Intl.DateTimeFormat("fr-FR", {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+      timeZone: "UTC",
+    }).format(date);
+  }
+
+  // Web3Forms prints every non-technical key as a line of the notification email,
+  // in insertion order: keys are the French labels the recipients read.
+  function buildPayload() {
+    const fields = Object.fromEntries(new FormData(form));
+    const prenom = fields.prenom.trim();
+    const nom = fields.nom.trim();
+    const date = formatDate(fields.date_evenement);
+    const message = fields.message.trim();
+
+    return {
+      access_key: fields.access_key,
+      from_name: fields.from_name,
+      ...(fields.botcheck ? { botcheck: fields.botcheck } : {}),
+      subject: `Nouvelle demande Salon du Mariage — ${prenom} ${nom} — ${date}`,
+      replyto: fields.email.trim(),
+      "Prénom": prenom,
+      "Nom": nom,
+      "Téléphone": fields.telephone.trim(),
+      "E-mail": fields.email.trim(),
+      "Date de l'événement": date,
+      "Lieu de l'événement": fields.lieu_evenement.trim(),
+      "Formule choisie": fields.formule,
+      "Message": message || "Aucun message",
+      "Consentement RGPD": "Oui",
+    };
+  }
+
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     status.textContent = "";
@@ -59,11 +99,10 @@
     submitBtn.textContent = "Envoi en cours…";
 
     try {
-      const data = Object.fromEntries(new FormData(form));
       const response = await fetch(ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify(buildPayload()),
       });
       const result = await response.json();
       if (!response.ok || !result.success) throw new Error(result.message || "Submission failed");
