@@ -5,6 +5,7 @@
 
   const form = document.getElementById("lvp-form");
   const success = document.getElementById("lvp-success");
+  const heroCta = document.getElementById("lvp-cta");
   const status = form.querySelector(".lvp-status");
   const submitBtn = form.querySelector('button[type="submit"]');
   const dateInput = form.querySelector("#lvp-date");
@@ -108,6 +109,7 @@
       if (!response.ok || !result.success) throw new Error(result.message || "Submission failed");
 
       form.hidden = true;
+      heroCta.hidden = true; // the request is sent: nothing left to scroll to
       success.hidden = false;
       success.focus();
       success.scrollIntoView({ behavior: "smooth", block: "center" });
